@@ -3,10 +3,15 @@ The application architecture doesn’t seem to follow design principles DRY | SO
 I will add more layers of services/resource classes/notifications etc, that will increase code readability, maintainability, scalability and testability. The final architecture will be as follows:
 
 Models: with responsibility to interact with database tables/relationships etc.
+
 Resource (Transformers): with responsibility to transform data into Array/JSON
+
 Repositories: perform data access and persistence encapsulation for particular implementation allowing easy interchangeability.
+
 Services: with responsibility to implement the business and complex logic.
+
 Controllers: with responsibility to receive the request, pass data for processing to appropriate services, and return the processed data as a response.
+
 Notifications: with responsibility to send all emails/SMS to users/customers/translator/admin etc.
 
 Here are the sample refactorings along with potential issues and their resolution/suggestions.
