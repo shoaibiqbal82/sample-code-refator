@@ -30,6 +30,9 @@ class TeHelper
         }
     }
 
+    // This can alos be done via repository method
+    // using whereIn on model e.g ->whereIn('id', $jobs_ids);
+    
     public static function convertJobIdsInObjs($jobs_ids)
     {
 

@@ -283,6 +283,8 @@ class BookingRepository extends BaseRepository
      * @param $data
      * @return mixed
      */
+
+    // use notification feature of laravel for reusable, clean code, DRY
     public function storeJobEmail($data)
     {
         $user_type = $data['user_type'];
@@ -324,6 +326,10 @@ class BookingRepository extends BaseRepository
      * @param $job
      * @return array
      */
+
+    // This should be doen in resources so that the code will be reusable 
+    // and follow DRY principle
+
     public function jobToData($job)
     {
 

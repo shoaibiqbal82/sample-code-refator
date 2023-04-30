@@ -2,6 +2,7 @@
 
 namespace DTApi\Http\Controllers;
 
+use App\Services\BookingService;
 use DTApi\Models\Job;
 use DTApi\Http\Requests;
 use DTApi\Models\Distance;
@@ -19,14 +20,16 @@ class BookingController extends Controller
      * @var BookingRepository
      */
     protected $repository;
+    protected $bookingService;
 
     /**
      * BookingController constructor.
      * @param BookingRepository $bookingRepository
      */
-    public function __construct(BookingRepository $bookingRepository)
+    public function __construct(BookingRepository $bookingRepository, BookingService $bookingService)
     {
         $this->repository = $bookingRepository;
+        $this->bookingService = $bookingService;
     }
 
     /**
@@ -35,15 +38,21 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        if($user_id = $request->get('user_id')) {
+        // All bussiness logic should be moved to service layer 
+        // to comply with DRY, SOLID design patterns/principles.
+        // codebase will be more readable, maintainable, scaleable.
+        
+        $response = $this->bookingService->getUsersJobs();
 
-            $response = $this->repository->getUsersJobs($user_id);
+        // if($user_id = $request->get('user_id')) {
 
-        }
-        elseif($request->__authenticatedUser->user_type == env('ADMIN_ROLE_ID') || $request->__authenticatedUser->user_type == env('SUPERADMIN_ROLE_ID'))
-        {
-            $response = $this->repository->getAll($request);
-        }
+        //     $response = $this->repository->getUsersJobs($user_id);
+
+        // }
+        // elseif($request->__authenticatedUser->user_type == env('ADMIN_ROLE_ID') || $request->__authenticatedUser->user_type == env('SUPERADMIN_ROLE_ID'))
+        // {
+        //     $response = $this->repository->getAll($request);
+        // }
 
         return response($response);
     }
